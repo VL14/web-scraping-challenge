@@ -12,14 +12,34 @@
 <body>
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1>Everything You Wanted To Know About Mars</h1>
+      <h1>Fascinating Mars</h1>
       <p>News. Images. Weather. Facts. Hemispheres.</p>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Updated Data!</a></p>
     </div>
-    <img src="{{ data.featured_img_url }}" alt="Mars Image">
-    <h2>The Weather In Mars:</h2>
-    <h3>Today's Weather: {{ data.tweet_div }}</h3>
   </div>
+    
+    <h2>The Latest Mars News:</h2>
+    <p><b>{{ mars.title }}</b></p>
+    <p>{{ mars.p }}</p></br>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Today's Featured Mars Image</h3>
+            <img src="{{ mars.featured_img_url }}" alt="Image of Mars">
+        </div>
+
+        <div class="col-md-4">
+            <span class="border border-dark">
+                <h3>Current Weather On Mars:</h3>
+                <p>{{ mars.tweet_div }}</p>
+            </span>
+
+            <h3>Mars Facts</h3>
+            <table>{{ mars.table }}</table>  
+
+        </div>
+    </div>
+  
   </div>
 </body>
 
