@@ -7,40 +7,103 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mars Data</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    /* Set blue background color behind main content */
+    .content {
+      padding-top: 20px;
+      background-color: lightblue;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container content">
     <div class="jumbotron text-center">
       <h1>Fascinating Mars</h1>
       <p>News. Images. Weather. Facts. Hemispheres.</p>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Updated Data!</a></p>
     </div>
-  </div>
+  
     
-    <h2>The Latest Mars News:</h2>
-    <p><b>{{ mars.title }}</b></p>
-    <p>{{ mars.p }}</p></br>
+    <div class="row">
+      <div class="col-md-8">  
+        <h2><b>The Latest Mars News:</b></h2>
+        <p>Title: {{ mars.title }}</b></p>
+        <p>Summary: {{ mars.summary }}</p></br>
+      </div>
+    </div>
+
+    <hr>
 
     <div class="row">
-        <div class="col-md-8">
-            <h3>Today's Featured Mars Image</h3>
-            <img src="{{ mars.featured_img_url }}" alt="Image of Mars">
+      <div class="col-md-8">
+          <h2><b>Today's Featured Mars Image</b></h2>
+          <a href="https://www.jpl.nasa.gov/spaceimages/images/mediumsize/PIA19382_ip.jpg"><img src="{{ mars.featured_image_url }}" alt="Image of Mars" style="width:90%;"></a>
+      </div>
+    
+      <div class="col-md-4">
+            <h2><b>Mars Facts</b></h2>
+            <table class="table table-bordered ">{{ mars.table }}</table>
+      </div>   
+    </div>    
+
+    <hr>
+        
+    <!-- First hemisphere -->
+    <div class="row">
+      <div class="col-md-5">
+        <h2><b>The Hemispheres</b></h2>
+        <div class="thumbnail">
+          <a href="{{ mars.hemi_url1 }}">
+            <img src="{{ mars.hemi_url1 }}" alt="hemisphere1" style="width:200px;height:250px;">
+            <div class="caption">
+              <p>{{mars.hemi1}}</p>
+            </div>
+          </a>
         </div>
-
-        <div class="col-md-4">
-            <span class="border border-dark">
-                <h3>Current Weather On Mars:</h3>
-                <p>{{ mars.tweet_div }}</p>
-            </span>
-
-            <h3>Mars Facts</h3>
-            <table>{{ mars.table }}</table>  
-
-        </div>
+      </div>
     </div>
-  
-  </div>
-</body>
 
+    <!-- Second hemisphere -->
+      <div class="col-md-5">
+        <div class="thumbnail">
+          <a href="{{ mars.hemi_url2 }}">
+            <img src="{{ mars.hemi_url2 }}" alt="hemisphere2" style="width:200px;height:250px;">
+            <div class="caption">
+              <p>{{mars.hemi2}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third hemisphere -->
+    <div class="row">
+      <div class="col-md-5">
+        <div class="thumbnail">
+          <a href="{{ mars.hemi_url3 }}">
+            <img src="{{ mars.hemi_url3 }}" alt="hemisphere3" style="width:200px;height:250px;">
+            <div class="caption">
+              <p>{{mars.hemi3}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fourth hemisphere -->
+      <div class="col-md-5">
+        <div class="thumbnail">
+          <a href="{{ mars.hemi_url4 }}">
+            <img src="{{ mars.hemi_url4 }}" alt="hemisphere4" style="width:200px;height:250px;">
+            <div class="caption">
+              <p>{{mars.hemi4}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>  
+</body>
 </html>

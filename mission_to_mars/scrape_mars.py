@@ -35,8 +35,9 @@ def scrape():
     # Scrape end of url for featured image
     url_end = featured_image.get("data-fancybox-href")
     # Create variable to hold whole url
-    featured_image_url = f"{url2}{url_end}"
-    
+    jpl_prefix = 'https://www.jpl.nasa.gov'
+    featured_image_url = f"{jpl_prefix}{url_end}"
+
     # Retrieve Mars Weather Twitter page with Chromedriver
     url3 = 'https://twitter.com/marswxreport?lang=en'
     driver = webdriver.Chrome()
@@ -44,10 +45,10 @@ def scrape():
     time.sleep(3)
     # Find first tweet
     tweet_div = driver.find_elements_by_xpath('/html/body/div/div/div/div[2]/main/div/div/div/div/div/div/div/div/div[2]/section/div/div/div[1]/div/div/div/article/div/div[2]/div[2]/div[2]/div[1]/div')
+    weather=[]
     for x in tweet_div:
-        weather = x.text
-    driver.close()
-
+        weather.append(x)
+    
     # Import Mars Facts url with pandas
     url4 = 'https://space-facts.com/mars/'
     table = pd.read_html(url4)
@@ -68,27 +69,37 @@ def scrape():
     # Set prefix and suffix for each image url
     base_url = 'https://astropedia.astrogeology.usgs.gov/download/'
     url_suffix = '.tif'
-    # Loop through results to get hemisphere name
+    # Loop through results to get hemisphere names
+    names=[]
+    h_urls=[]
     for item in hemi_results:
         name = item.find('h3').text.rsplit(" ",1)
         hemi = name[0]    
+        names.append(hemi)
         # Loop through results to get url to add to base url
         hemi_href = item.find('a')['href']
         href_split = hemi_href.split("/",3)
         href = href_split[2]
         hemi_url = f"{base_url}{href}{url_suffix}"
+        h_urls.append(hemi_url)
+
     
     # Create dictionary to hold scraped data
     Mars_Dict={
-        "News Title": title,
-        "News Summary": p,
-        "Featured Image URL": featured_image_url,
-        "Current Mars Weather": weather,
-        "Mars Facts Table": table_stripped,
-        "Hemisphere Image URL": hemi_url,
-        "Hemisphere Name": hemi
+        "title": title,
+        "summary": p,
+        "featured_image_url": featured_image_url,
+        "weather": weather,
+        "table": table_stripped,
+        "hemi_url1": h_urls[0],
+        "hemi1": names[0],
+        "hemi_url2": h_urls[1],
+        "hemi2": names[1],
+        "hemi_url3": h_urls[2],
+        "hemi3": names[2],
+        "hemi_url4": h_urls[3],
+        "hemi4": names[3], 
     }
     
-    print(Mars_Dict)
     return Mars_Dict
     
