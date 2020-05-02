@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import pandas as pd 
 from selenium import webdriver
+from splinter import Browser
 import requests
 import time
 
@@ -48,46 +49,46 @@ def scrape():
     # Convert table to html
     mars_facts = df_new_index.to_html()
       
-    # Retrieve Mars Hemispheres image urls with 'get requests' module
+    # Retrieve Mars Hemispheres image urls with splinter
+    executable_path = {"executable_path": "C:/Users/vll14/chromedriver.exe"}
+    browser = Browser("chrome", **executable_path, headless=False)
     url5 = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    response5 = requests.get(url5)
+    browser.visit(url5)
+    time.sleep(5)
     # Save hemispheres page data into Soup
-    hemi_soup = bs(response5.text, "html.parser")
-    # Filter results to find image url data
-    hemi_results = hemi_soup.find_all('div', class_="item")
-    # Set prefix and suffix for each image url
-    base_url = 'https://astropedia.astrogeology.usgs.gov/download/'
-    url_suffix = '.tif'
-    # Loop through results to get hemisphere names
-    names=[]
-    h_urls=[]
-    for item in hemi_results:
-        name = item.find('h3').text.rsplit(" ",1)
-        hemi = name[0]    
-        names.append(hemi)
-        # Loop through results to get url to add to base url
-        hemi_href = item.find('a')['href']
-        href_split = hemi_href.split("/",3)
-        href = href_split[2]
-        hemi_url = f"{base_url}{href}{url_suffix}"
-        h_urls.append(hemi_url)
-
-    
+    html5 = browser.html
+    hemi_soup = bs(html5, "html.parser")
+    # Find correct div and class
+    hemi_links_div = hemi_soup.find_all('div', class_='item')
+    # Set prefix for each image url
+    base_url = 'https://astrogeology.usgs.gov'
+    # Set up list to hold urls with image info
+    hemi_names = []
+    mars_links = []
+    for result in hemi_links_div:
+        href = result.find('a', class_='itemLink').get('href')
+        hemi = result.find('h3').text
+        hemi_names.append(hemi)
+        url = f"{base_url}{href}"
+        mars_links.append(url) 
+        browser.quit()
+    # Array for image url links - not working so didn't include in scraper
+        
     # Create dictionary to hold scraped data
     Mars_Dict={
         "title": title,
         "summary": p,
         "featured_image_url": featured_image_url,
         "table": mars_facts,
-        "hemi_url1": h_urls[0],
-        "hemi1": names[0],
-        "hemi_url2": h_urls[1],
-        "hemi2": names[1],
-        "hemi_url3": h_urls[2],
-        "hemi3": names[2],
-        "hemi_url4": h_urls[3],
-        "hemi4": names[3], 
+        #"hemi_url1": hemi_links[0],
+        "hemi1": hemi_names[0],
+        #"hemi_url2": hemi_links[1],
+        "hemi2": hemi_names[1],
+        #"hemi_url3": hemi_links[2],
+        "hemi3": hemi_names[2],
+        #"hemi_url4": hemi_links[3],
+        "hemi4": hemi_names[3], 
     }
-    
+
     return Mars_Dict
     
