@@ -44,10 +44,12 @@ def scrape():
     table = pd.read_html(url4)
     # Convert table to a dataframe
     df = table[0]
+    # Name columns
+    df.columns=["Description","Value"]
     # Set first column to index
-    df_new_index = df.set_index(0)
-    # Convert table to html
-    mars_facts = df_new_index.to_html()
+    df.index.drop
+    # Convert table to html & save
+    mars_facts = df.to_html(classes=["table-bordered"], index=False)
       
     # Retrieve Mars Hemispheres image urls with splinter
     executable_path = {"executable_path": "C:/Users/vll14/chromedriver.exe"}
@@ -79,7 +81,7 @@ def scrape():
         "title": title,
         "summary": p,
         "featured_image_url": featured_image_url,
-        "table": mars_facts,
+        "mars_facts": mars_facts,
         #"hemi_url1": hemi_links[0],
         "hemi1": hemi_names[0],
         #"hemi_url2": hemi_links[1],
