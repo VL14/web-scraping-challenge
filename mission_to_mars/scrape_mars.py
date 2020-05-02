@@ -38,27 +38,16 @@ def scrape():
     jpl_prefix = 'https://www.jpl.nasa.gov'
     featured_image_url = f"{jpl_prefix}{url_end}"
 
-    # Retrieve Mars Weather Twitter page with Chromedriver
-    url3 = 'https://twitter.com/marswxreport?lang=en'
-    driver = webdriver.Chrome()
-    driver.get(url3)
-    time.sleep(3)
-    # Find first tweet
-    tweet_div = driver.find_elements_by_xpath('/html/body/div/div/div/div[2]/main/div/div/div/div/div/div/div/div/div[2]/section/div/div/div[1]/div/div/div/article/div/div[2]/div[2]/div[2]/div[1]/div')
-    weather=[]
-    for x in tweet_div:
-        weather.append(x)
-    
     # Import Mars Facts url with pandas
     url4 = 'https://space-facts.com/mars/'
     table = pd.read_html(url4)
     # Convert table to a dataframe
     df = table[0]
-    # Generate html table
-    html_table = df.to_html()
-    # Strip newlines
-    table_stripped = html_table.replace('\n', '')
-    
+    # Set first column to index
+    df_new_index = df.set_index(0)
+    # Convert table to html
+    mars_facts = df_new_index.to_html()
+      
     # Retrieve Mars Hemispheres image urls with 'get requests' module
     url5 = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     response5 = requests.get(url5)
@@ -89,8 +78,7 @@ def scrape():
         "title": title,
         "summary": p,
         "featured_image_url": featured_image_url,
-        "weather": weather,
-        "table": table_stripped,
+        "table": mars_facts,
         "hemi_url1": h_urls[0],
         "hemi1": names[0],
         "hemi_url2": h_urls[1],

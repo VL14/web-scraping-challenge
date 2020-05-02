@@ -7,11 +7,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mars Data</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     /* Set blue background color behind main content */
     .content {
       padding-top: 20px;
+      padding-left: 10px;
       background-color: lightblue;
+    }
+    
+    /* Set padding for rows of content */
+    .padding {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    /* Set table border color */
+    table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+    }
+    table.table-bordered > tbody > tr > th{
+        border:1px solid black;
+    }
+    table.table-bordered > tbody > tr > td{
+        border:1px solid black;
     }
   </style>
 </head>
@@ -25,51 +45,92 @@
     </div>
   
     
-    <div class="row">
+    <div class="row padding">
       <div class="col-md-8">  
         <h2><b>The Latest Mars News:</b></h2>
         <p>Title: {{ mars.title }}</b></p>
         <p>Summary: {{ mars.summary }}</p></br>
       </div>
-    </div>
 
-    <hr>
-
-    <div class="row">
+    <div class="row padding">
       <div class="col-md-8">
-          <h2><b>Today's Featured Mars Image</b></h2>
-          <a href="https://www.jpl.nasa.gov/spaceimages/images/mediumsize/PIA19382_ip.jpg"><img src="{{ mars.featured_image_url }}" alt="Image of Mars" style="width:90%;"></a>
+          <h2><b> Today's Featured Mars Image:</b></h2>
+          <a href="{{ mars.featured_image_url }}"><img src="{{ mars.featured_image_url }}" alt="Image of Mars" style="width:600px;height:500px;"></a>
       </div>
     
       <div class="col-md-4">
-            <h2><b>Mars Facts</b></h2>
-            <table class="table table-bordered ">{{ mars.table }}</table>
+            <h2><b>Mars Facts:</b></h2>
+            <table border="1" class="dataframe table-bordered">
+              <tbody>
+                <tr>
+                  <th>Equatorial Diameter:</th>
+                  <td>6,792 km</td>
+                </tr>
+                <tr>
+                  <th>Polar Diameter:</th>
+                  <td>6,752 km</td>
+                </tr>
+                <tr>
+                  <th>Mass:</th>
+                  <td>6.39 × 10^23 kg (0.11 Earths)</td>
+                </tr>
+                <tr>
+                  <th>Moons:</th>
+                  <td>2 (Phobos &amp; Deimos)</td>
+                </tr>
+                <tr>
+                  <th>Orbit Distance:</th>
+                  <td>227,943,824 km (1.38 AU)</td>
+                </tr>
+                <tr>
+                  <th>Orbit Period:</th>
+                  <td>687 days (1.9 years)</td>
+                </tr>
+                <tr>
+                  <th>Surface Temperature:</th>
+                  <td>-87 to -5 °C</td>
+                </tr>
+                <tr>
+                  <th>First Record:</th>
+                  <td>2nd millennium BC</td>
+                </tr>
+                <tr>
+                  <th>Recorded By:</th>
+                  <td>Egyptian astronomers</td>
+                </tr>
+              </tbody>
+            </table>
+            
       </div>   
     </div>    
-
-    <hr>
         
+    
     <!-- First hemisphere -->
-    <div class="row">
+    <div class="row padding">
+      <div class="col-md-12">
+        <h2><b>The Hemispheres:</b></h2>
+      </div>
+    </div>
+
+    <div class="row padding"></div>
       <div class="col-md-5">
-        <h2><b>The Hemispheres</b></h2>
         <div class="thumbnail">
-          <a href="{{ mars.hemi_url1 }}">
-            <img src="{{ mars.hemi_url1 }}" alt="hemisphere1" style="width:200px;height:250px;">
-            <div class="caption">
+          <a href="https://astrogeology.usgs.gov/cache/images/cfa62af2557222a02478f1fcd781d445_cerberus_enhanced.tif_full.jpg">
+            <img src="https://astrogeology.usgs.gov/cache/images/cfa62af2557222a02478f1fcd781d445_cerberus_enhanced.tif_full.jpg" alt="hemisphere1" style="width:350px;height:350px;">
+            <div class="caption text-center">
               <p>{{mars.hemi1}}</p>
             </div>
           </a>
         </div>
       </div>
-    </div>
+    
 
     <!-- Second hemisphere -->
       <div class="col-md-5">
         <div class="thumbnail">
-          <a href="{{ mars.hemi_url2 }}">
-            <img src="{{ mars.hemi_url2 }}" alt="hemisphere2" style="width:200px;height:250px;">
-            <div class="caption">
+          <a href="https://astrogeology.usgs.gov/cache/images/3cdd1cbf5e0813bba925c9030d13b62e_schiaparelli_enhanced.tif_full.jpg">
+            <img src="https://astrogeology.usgs.gov/cache/images/3cdd1cbf5e0813bba925c9030d13b62e_schiaparelli_enhanced.tif_full.jpg" alt="hemisphere2" style="width:350px;height:350px;">
+            <div class="caption text-center">
               <p>{{mars.hemi2}}</p>
             </div>
           </a>
@@ -78,25 +139,25 @@
     </div>
 
     <!-- Third hemisphere -->
-    <div class="row">
+    <div class="row padding">
       <div class="col-md-5">
         <div class="thumbnail">
-          <a href="{{ mars.hemi_url3 }}">
-            <img src="{{ mars.hemi_url3 }}" alt="hemisphere3" style="width:200px;height:250px;">
-            <div class="caption">
+          <a href="https://astrogeology.usgs.gov/cache/images/ae209b4e408bb6c3e67b6af38168cf28_syrtis_major_enhanced.tif_full.jpg">
+            <img src="https://astrogeology.usgs.gov/cache/images/ae209b4e408bb6c3e67b6af38168cf28_syrtis_major_enhanced.tif_full.jpg" alt="hemisphere3" style="width:350px;height:350px;">
+            <div class="caption text-center">
               <p>{{mars.hemi3}}</p>
             </div>
           </a>
         </div>
       </div>
-    </div>
+    
 
     <!-- Fourth hemisphere -->
       <div class="col-md-5">
         <div class="thumbnail">
-          <a href="{{ mars.hemi_url4 }}">
-            <img src="{{ mars.hemi_url4 }}" alt="hemisphere4" style="width:200px;height:250px;">
-            <div class="caption">
+          <a href="https://astrogeology.usgs.gov/cache/images/7cf2da4bf549ed01c17f206327be4db7_valles_marineris_enhanced.tif_full.jpg">
+            <img src="https://astrogeology.usgs.gov/cache/images/7cf2da4bf549ed01c17f206327be4db7_valles_marineris_enhanced.tif_full.jpg" alt="hemisphere4" style="width:350px;height:350px;">
+            <div class="caption text-center">
               <p>{{mars.hemi4}}</p>
             </div>
           </a>
