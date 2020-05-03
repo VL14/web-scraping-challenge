@@ -20,9 +20,11 @@ Files included in Github:
 
 --scrape_mars python file - function with code from jupyter notebook that is called by the app
 
---app python file - calls the scrape function and saves the data to mongo, and sets up Flask routes
+--app python file - calls the scrape function, saves the data to mongo, and sets up Flask routes
 
 --templates -> index.html - code to render the webpage
 
 --website1 & website2 - screenshots of final website
 
+
+Direct link to the site: https://vl14.github.io/web-scraping-challenge/
