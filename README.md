@@ -26,5 +26,3 @@ Files included in Github:
 
 --website1 & website2 - screenshots of final website
 
-
-Direct link to the site: https://vl14.github.io/web-scraping-challenge/
