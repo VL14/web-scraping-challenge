@@ -1,6 +1,6 @@
 # web-scraping-challenge
 
-For this assignment, I built a web application that scrapes various websites for data related to Mars, then displays the information in a single HTML page. Requests, splinter, selenium, and pandas were used to scrape the websites. BeautifulSoup was used to parse website data. Mongo was used to store the scraped data, while Flask was used to render the data to the webpage.
+Web application that scrapes various websites for data related to Mars, then displays the information in a single HTML page. Requests, splinter, selenium, and pandas were used to scrape the websites. BeautifulSoup was used to parse website data. Mongo was used to store the scraped data, while Flask was used to render the data to the webpage.
 
 
 The following websites were scraped:
@@ -14,7 +14,7 @@ The following websites were scraped:
 --USGS Astrogeology site (https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) - scraped the hemisphere name and image url for the 4 hemispheres
 
 
-Files included in Github:
+## Files
 
 --mission_to_mars jupyter notebook - used to write and test code
 
